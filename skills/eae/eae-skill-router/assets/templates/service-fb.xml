@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FBType GUID="{NEW-GUID}" Name="{BlockName}_HMI" Namespace="{YourNamespace}">
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="{HEX-GUID-1}" Name="INIT">
+        <With Var="QI" />
+      </Event>
+      <Event ID="{HEX-GUID-2}" Name="REQ_INITDATA" />
+      <Event ID="{HEX-GUID-3}" Name="UPD">
+        <With Var="Value" />
+        <With Var="Status" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="{HEX-GUID-4}" Name="INITO">
+        <With Var="QO" />
+        <With Var="STATUS" />
+      </Event>
+      <Event ID="{HEX-GUID-5}" Name="CFG">
+        <With Var="ConfigParam1" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="{HEX-GUID-6}" Name="QI" Type="BOOL" />
+      <VarDeclaration ID="{HEX-GUID-7}" Name="Value" Type="REAL" />
+      <VarDeclaration ID="{HEX-GUID-8}" Name="Status" Type="Status" Namespace="SE.App2Base" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="{HEX-GUID-9}" Name="QO" Type="BOOL" />
+      <VarDeclaration ID="{HEX-GUID-10}" Name="STATUS" Type="STRING" />
+      <VarDeclaration ID="{HEX-GUID-11}" Name="ConfigParam1" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <Service RightInterface="" LeftInterface="">
+    <ServiceSequence Name="" />
+  </Service>
+</FBType>

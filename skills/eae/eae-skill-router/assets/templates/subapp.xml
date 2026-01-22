@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SubAppType GUID="{NEW-GUID}" Name="{SubAppName}" Comment="Sub-Application Type" Namespace="{YourNamespace}">
+  <VersionInfo Organization="{YourOrg}" Version="1.0.0" Author="{Author}" Date="{Date}" Remarks="Initial version" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="START" Comment="Start sub-application" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="STARTED" Comment="Sub-application started" />
+      <Event Name="STOPPED" Comment="Sub-application stopped" />
+    </EventOutputs>
+  </InterfaceList>
+  <SubAppNetwork>
+    <!-- Can contain both SubApps and FBs -->
+
+    <!-- Nested SubApp instance -->
+    <!-- <SubApp ID="1" Name="childSubApp" Type="{ChildSubAppType}"
+              x="200" y="200" Namespace="{ns}" /> -->
+
+    <!-- FB instance -->
+    <FB ID="1" Name="mainFB" Type="{FBType}" x="400" y="200" Namespace="{ns}" />
+
+    <!-- Interface mappings -->
+    <Input Name="START" x="100" y="200" Type="Event" />
+    <Output Name="STARTED" x="600" y="200" Type="Event" />
+    <Output Name="STOPPED" x="600" y="300" Type="Event" />
+
+    <EventConnections>
+      <Connection Source="$START" Destination="$1.REQ" />
+      <Connection Source="$1.CNF" Destination="$STARTED" />
+    </EventConnections>
+  </SubAppNetwork>
+</SubAppType>

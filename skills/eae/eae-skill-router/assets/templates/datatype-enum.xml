@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE DataType SYSTEM "../DataType.dtd" >
+<DataType Name="{TypeName}" Namespace="{YourNamespace}" Comment="Enumerated Data Type" >
+  <Identification Standard="1131-3" />
+  <VersionInfo Organization="{YourOrg}" Version="0.0" Author="{Author}" Date="{MM/DD/YYYY}" Remarks="Template" />
+  <CompilerInfo />
+  <EnumeratedType>
+    <EnumeratedValue Name="value1" />
+    <EnumeratedValue Name="value2" />
+    <EnumeratedValue Name="value3" />
+    <!-- Add more values as needed -->
+  </EnumeratedType>
+</DataType>

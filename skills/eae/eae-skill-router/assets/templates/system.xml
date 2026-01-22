@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<System GUID="{NEW-GUID}" Name="{SystemName}" Comment="System Configuration" Namespace="{YourNamespace}">
+  <VersionInfo Organization="{YourOrg}" Version="1.0.0" Author="{Author}" Date="{Date}" Remarks="Initial version" />
+  <!-- Devices and Applications are stored as separate files in {SystemGUID}/ folder -->
+</System>

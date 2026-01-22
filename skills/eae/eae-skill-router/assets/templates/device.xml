@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Device GUID="{NEW-GUID}" Name="{DeviceName}" Type="{DeviceType}"
+        Namespace="{DeviceTypeNamespace}" x="{x}" y="{y}">
+  <!--
+    Common Device Types:
+    - Soft_dPAC (Namespace: SE.App2Base) - Software PLC
+    - SCADAPack_57x (Namespace: SE.ScadapackRTU) - SCADAPack RTU
+
+    Resources are stored in {DeviceGUID}/ subfolder
+  -->
+</Device>

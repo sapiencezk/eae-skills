@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application GUID="{NEW-GUID}" Name="{ApplicationName}" Type="{ApplicationType}"
+             Namespace="{ApplicationTypeNamespace}" x="{x}" y="{y}">
+  <!--
+    Application represents a deployed instance of an application type.
+    The ApplicationType should reference a Composite FB or SubApp that
+    contains the application logic.
+
+    Applications are mapped to Resources for execution.
+  -->
+</Application>

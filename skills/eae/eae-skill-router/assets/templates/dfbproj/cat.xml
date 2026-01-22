@@ -1,0 +1,33 @@
+<!-- CAT Block dfbproj Registration Template -->
+<!-- Replace {BlockName} with actual block name -->
+<ItemGroup>
+  <Compile Include="{BlockName}\{BlockName}.fbt">
+    <IEC61499Type>CAT</IEC61499Type>
+  </Compile>
+  <Compile Include="{BlockName}\{BlockName}_HMI.fbt">
+    <IEC61499Type>CAT</IEC61499Type>
+    <Usage>Private</Usage>
+    <DependentUpon>{BlockName}.fbt</DependentUpon>
+    <HMI>..\HMI\{BlockName}\{BlockName}_sDefault.cnv.cs</HMI>
+  </Compile>
+</ItemGroup>
+<ItemGroup>
+  <None Include="{BlockName}\{BlockName}.cfg">
+    <DependentUpon>{BlockName}.fbt</DependentUpon>
+    <IEC61499Type>CAT</IEC61499Type>
+  </None>
+  <None Include="{BlockName}\{BlockName}_CAT.offline.xml">
+    <DependentUpon>{BlockName}.fbt</DependentUpon>
+    <Plugin>OfflineParametrizationEditor</Plugin>
+    <IEC61499Type>CAT_OFFLINE</IEC61499Type>
+  </None>
+  <None Include="{BlockName}\{BlockName}_CAT.opcua.xml">
+    <DependentUpon>{BlockName}.fbt</DependentUpon>
+    <Plugin>OPCUAConfigurator</Plugin>
+    <IEC61499Type>CAT_OPCUA</IEC61499Type>
+  </None>
+  <None Include="{BlockName}\{BlockName}_CAT.aspmap.xml">
+    <DependentUpon>{BlockName}.fbt</DependentUpon>
+    <IEC61499Type>CAT_ASPMAP</IEC61499Type>
+  </None>
+</ItemGroup>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE DataType SYSTEM "../LibraryElement.dtd" >
+<DataType Name="{TypeName}" Namespace="{YourNamespace}" GUID="{NEW-GUID}" Comment="{Description}" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="{YourOrg}" Version="0.0" Author="{Author}" Date="{MM/DD/YYYY}" />
+  <CompilerInfo />
+  <ASN1Tag />
+  <StructuredType>
+    <VarDeclaration Name="Field1" Type="REAL" Comment="First field" />
+    <VarDeclaration Name="Field2" Type="BOOL" Comment="Second field" />
+    <VarDeclaration Name="Field3" Type="INT" Comment="Third field" />
+    <!-- For nested types: -->
+    <!-- <VarDeclaration Name="NestedField" Type="{OtherType}" Namespace="{OtherNs}" /> -->
+  </StructuredType>
+</DataType>

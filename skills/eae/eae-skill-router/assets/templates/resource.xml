@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Resource GUID="{NEW-GUID}" Name="{ResourceName}" Type="{ResourceType}"
+          Namespace="{ResourceTypeNamespace}" x="{x}" y="{y}">
+  <FBNetwork>
+    <!-- FB instances deployed to this resource -->
+    <FB ID="1" Name="{fbInstance}" Type="{FBType}"
+        x="200" y="200" Namespace="{FBNamespace}">
+      <!-- Parameters and connections -->
+    </FB>
+
+    <!-- Event and data connections between FBs -->
+    <EventConnections>
+      <!-- <Connection Source="$1.CNF" Destination="$2.REQ" /> -->
+    </EventConnections>
+    <DataConnections>
+      <!-- <Connection Source="$1.Out" Destination="$2.In" /> -->
+    </DataConnections>
+  </FBNetwork>
+</Resource>

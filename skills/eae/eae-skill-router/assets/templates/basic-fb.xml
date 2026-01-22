@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd" >
+<FBType Name="{BlockName}" Namespace="{YourNamespace}" GUID="{NEW-GUID}" Comment="{Description}" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="{YourOrg}" Version="0.0" Author="{Author}" Date="{MM/DD/YYYY}" Remarks="Initial version" />
+  <CompilerInfo />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="{HEX-ID-1}" Name="INIT" Comment="Initialization Request" >
+        <With Var="QI" />
+      </Event>
+      <Event ID="{HEX-ID-2}" Name="REQ" Comment="Normal Execution Request" >
+        <With Var="QI" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="{HEX-ID-3}" Name="INITO" Comment="Initialization Confirm" >
+        <With Var="QO" />
+      </Event>
+      <Event ID="{HEX-ID-4}" Name="CNF" Comment="Execution Confirmation" >
+        <With Var="QO" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="{HEX-ID-5}" Name="QI" Type="BOOL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="{HEX-ID-6}" Name="QO" Type="BOOL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <ECC >
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" >
+      </ECState>
+      <ECState Name="INIT" Comment="Initialization" x="923.5294" y="141.1765" >
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="REQ" Comment="Normal execution" x="217.647" y="752.9412" >
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="923.5294" y="429.4117" />
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="552.9412" y="141.1765" />
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="552.9412" y="600.0" />
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="217.647" y="429.4117" />
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm" >
+      <ST><![CDATA[{INIT_ALGORITHM_CODE}]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm" >
+      <ST><![CDATA[{REQ_ALGORITHM_CODE}]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

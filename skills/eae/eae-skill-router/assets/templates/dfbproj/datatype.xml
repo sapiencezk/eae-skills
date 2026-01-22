@@ -1,0 +1,13 @@
+<!-- DataType dfbproj Registration Template -->
+<!-- Replace {BlockName} with actual block name -->
+<!-- Note: DataTypes use DataType\ subfolder -->
+<ItemGroup>
+  <None Include="DataType\{BlockName}.doc.xml">
+    <DependentUpon>{BlockName}.dt</DependentUpon>
+  </None>
+</ItemGroup>
+<ItemGroup>
+  <Compile Include="DataType\{BlockName}.dt">
+    <IEC61499Type>DataType</IEC61499Type>
+  </Compile>
+</ItemGroup>

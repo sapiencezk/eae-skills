@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE AdapterType SYSTEM "../LibraryElement.dtd" >
+<AdapterType Name="{AdapterName}" Namespace="{YourNamespace}" GUID="{NEW-GUID}" Comment="Adapter Interface" >
+  <Identification Standard="61499-1" />
+  <VersionInfo Organization="{YourOrg}" Version="0.0" Author="{Author}" Date="{MM/DD/YYYY}" />
+  <CompilerInfo />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="{HEX-ID-1}" Name="REQ" Comment="Request from Socket" >
+        <With Var="REQD" />
+      </Event>
+      <Event ID="{HEX-ID-2}" Name="RSP" Comment="Response from Socket" >
+        <With Var="RSPD" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="{HEX-ID-3}" Name="CNF" Comment="Confirmation from Plug" >
+        <With Var="CNFD" />
+      </Event>
+      <Event ID="{HEX-ID-4}" Name="IND" Comment="Indication from Plug" >
+        <With Var="INDD" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="{HEX-ID-5}" Name="REQD" Type="STRING[15]" Comment="Request Data from Socket" />
+      <VarDeclaration ID="{HEX-ID-6}" Name="RSPD" Type="STRING[15]" Comment="Response Data from Socket" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="{HEX-ID-7}" Name="CNFD" Type="STRING[15]" Comment="Confirmation Data from Plug" />
+      <VarDeclaration ID="{HEX-ID-8}" Name="INDD" Type="STRING[15]" Comment="Indication Data from Plug" />
+    </OutputVars>
+  </InterfaceList>
+  <Service RightInterface="PLUG" LeftInterface="SOCKET" >
+    <ServiceSequence Name="request_confirm" >
+      <ServiceTransaction >
+        <InputPrimitive Interface="SOCKET" Event="REQ" Parameters="REQD" />
+        <OutputPrimitive Interface="PLUG" Event="REQ" Parameters="REQD" />
+      </ServiceTransaction>
+      <ServiceTransaction >
+        <InputPrimitive Interface="PLUG" Event="CNF" Parameters="CNFD" />
+        <OutputPrimitive Interface="SOCKET" Event="CNF" Parameters="CNFD" />
+      </ServiceTransaction>
+    </ServiceSequence>
+    <ServiceSequence Name="indication_response" >
+      <ServiceTransaction >
+        <InputPrimitive Interface="PLUG" Event="IND" Parameters="INDD" />
+        <OutputPrimitive Interface="SOCKET" Event="IND" Parameters="INDD" />
+      </ServiceTransaction>
+      <ServiceTransaction >
+        <InputPrimitive Interface="SOCKET" Event="RSP" Parameters="RSPD" />
+        <OutputPrimitive Interface="PLUG" Event="RSP" Parameters="RSPD" />
+      </ServiceTransaction>
+    </ServiceSequence>
+  </Service>
+</AdapterType>

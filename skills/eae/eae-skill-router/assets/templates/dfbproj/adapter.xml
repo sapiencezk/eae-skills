@@ -1,0 +1,12 @@
+<!-- Adapter dfbproj Registration Template -->
+<!-- Replace {BlockName} with actual block name -->
+<ItemGroup>
+  <None Include="{BlockName}\{BlockName}.doc.xml">
+    <DependentUpon>{BlockName}.adp</DependentUpon>
+  </None>
+</ItemGroup>
+<ItemGroup>
+  <Compile Include="{BlockName}\{BlockName}.adp">
+    <IEC61499Type>Adapter</IEC61499Type>
+  </Compile>
+</ItemGroup>

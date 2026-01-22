@@ -1,0 +1,15 @@
+<!-- Basic FB dfbproj Registration Template -->
+<!-- Replace {BlockName} with actual block name -->
+<ItemGroup>
+  <None Include="{BlockName}\{BlockName}.doc.xml">
+    <DependentUpon>{BlockName}.fbt</DependentUpon>
+  </None>
+  <None Include="{BlockName}\{BlockName}.meta.xml">
+    <DependentUpon>{BlockName}.fbt</DependentUpon>
+  </None>
+</ItemGroup>
+<ItemGroup>
+  <Compile Include="{BlockName}\{BlockName}.fbt">
+    <IEC61499Type>Basic</IEC61499Type>
+  </Compile>
+</ItemGroup>

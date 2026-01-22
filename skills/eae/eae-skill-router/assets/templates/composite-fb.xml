@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd" >
+<FBType Name="{BlockName}" Namespace="{YourNamespace}" Format="2.0" GUID="{NEW-GUID}" Comment="{Description}" >
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="10" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="{YourOrg}" Version="0.0" Author="{Author}" Date="{MM/DD/YYYY}" Remarks="Initial version" />
+  <CompilerInfo />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="{HEX-ID-1}" Name="INIT" Comment="Initialization Request" >
+        <With Var="QI" />
+      </Event>
+      <Event ID="{HEX-ID-2}" Name="REQ" Comment="Normal Execution Request" >
+        <With Var="QI" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="{HEX-ID-3}" Name="INITO" Comment="Initialization Confirm" >
+        <With Var="QO" />
+      </Event>
+      <Event ID="{HEX-ID-4}" Name="CNF" Comment="Execution Confirmation" >
+        <With Var="QO" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="{HEX-ID-5}" Name="QI" Type="BOOL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="{HEX-ID-6}" Name="QO" Type="BOOL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <!--
+      Layout Conventions:
+      - Inputs:  x=100, events y=200+100*i, data y=500+100*i
+      - FBs:     x=500+400*i, y=350
+      - Outputs: x=800 (1 FB) or 500+(fbCount-1)*400+400, events y=200+100*i, data y=500+100*i
+    -->
+
+    <!-- FB instances: x = 500 + (index * 400), y = 350 -->
+    <FB ID="1" Name="subFB1" Type="{SubFBType}" x="500" y="350" Namespace="{SubFBNamespace}" />
+
+    <!-- Input events: x=100, y = 200 + (index * 100) -->
+    <Input Name="INIT" x="100" y="200" Type="Event" />
+    <Input Name="REQ" x="100" y="300" Type="Event" />
+
+    <!-- Input data: x=100, y = 500 + (index * 100) -->
+    <Input Name="QI" x="100" y="500" Type="Data" />
+
+    <!-- Output events: x=800 (for 1 FB), y = 200 + (index * 100) -->
+    <Output Name="INITO" x="800" y="200" Type="Event" />
+    <Output Name="CNF" x="800" y="300" Type="Event" />
+
+    <!-- Output data: x=800 (for 1 FB), y = 500 + (index * 100) -->
+    <Output Name="QO" x="800" y="500" Type="Data" />
+
+    <EventConnections>
+      <Connection Source="$INIT" Destination="$1.INIT" />
+      <Connection Source="$REQ" Destination="$1.REQ" />
+      <Connection Source="$1.INITO" Destination="$INITO" />
+      <Connection Source="$1.CNF" Destination="$CNF" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$QI" Destination="$1.QI" />
+      <Connection Source="$1.QO" Destination="$QO" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

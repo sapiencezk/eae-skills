@@ -1,0 +1,20 @@
+<!-- Composite FB dfbproj Registration Template -->
+<!-- Replace {BlockName} with actual block name -->
+<ItemGroup>
+  <None Include="{BlockName}\{BlockName}.doc.xml">
+    <DependentUpon>{BlockName}.fbt</DependentUpon>
+  </None>
+  <None Include="{BlockName}\{BlockName}.meta.xml">
+    <DependentUpon>{BlockName}.fbt</DependentUpon>
+  </None>
+  <None Include="{BlockName}\{BlockName}.composite.offline.xml">
+    <DependentUpon>{BlockName}.fbt</DependentUpon>
+    <Plugin>OfflineParametrizationEditor</Plugin>
+    <IEC61499Type>COMPOSITE_OFFLINE</IEC61499Type>
+  </None>
+</ItemGroup>
+<ItemGroup>
+  <Compile Include="{BlockName}\{BlockName}.fbt">
+    <IEC61499Type>Composite</IEC61499Type>
+  </Compile>
+</ItemGroup>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE DataType SYSTEM "../DataType.dtd" >
+<DataType Name="{TypeName}" Namespace="{YourNamespace}" Comment="Array Data Type" >
+  <Identification Standard="1131-3" />
+  <VersionInfo Organization="{YourOrg}" Version="0.0" Author="{Author}" Date="{MM/DD/YYYY}" Remarks="Template" />
+  <CompilerInfo />
+  <ArrayType BaseType="{BaseType}" Namespace="">
+    <Subrange LowerLimit="0" UpperLimit="{UpperLimit}" />
+  </ArrayType>
+</DataType>
