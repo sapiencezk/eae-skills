@@ -36,6 +36,9 @@ Router skill for EAE (EcoStruxure Automation Expert) development.
 | **Fork block from SE library to custom library** | `/eae-fork` |
 | Find/use Runtime.Base standard blocks | `/eae-runtime-base` |
 | Find/use SE process blocks (motors, valves, PID) | `/eae-se-process` |
+| **Analyze project overview, quality, protocols** | `/eae-sln-overview` |
+| Validate naming conventions | `/eae-naming-validator` |
+| Analyze performance/event storms | `/eae-performance-analyzer` |
 
 ## What Are You Creating?
 
@@ -79,15 +82,25 @@ What are you doing?
 
 ## Triggers
 
-- `/eae-skill-router` - This router (shows decision tree)
+### Block Creation/Modification
 - `/eae-cat` - Create CAT block with HMI (most common)
 - `/eae-basic-fb` - Create Basic FB
 - `/eae-composite-fb` - Create Composite FB
 - `/eae-datatype` - Create DataType
 - `/eae-adapter` - Create Adapter
 - `/eae-fork` - Fork block from SE library to custom library with namespace migration
+
+### Library Reference
 - `/eae-runtime-base` - Find/reference Runtime.Base standard library blocks
 - `/eae-se-process` - Find/reference SE.App2Base and SE.App2CommonProcess blocks
+
+### Analysis & Validation
+- `/eae-sln-overview` - Project overview, quality score, protocols, libraries
+- `/eae-naming-validator` - Validate SE naming conventions
+- `/eae-performance-analyzer` - Detect event storms, analyze performance
+
+### Router
+- `/eae-skill-router` - This router (shows decision tree)
 
 ---
 

@@ -1,2 +1,26 @@
+# Claude settings
 .claude/settings.local.json
-skills/eae-sln-overview/scripts/__pycache__
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+ENV/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Test outputs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -3,10 +3,11 @@ name: eae-sln-overview
 description: >
   Explores EAE projects and generates comprehensive summary reports including
   network architecture, protocols, libraries, I/O counts, ISA88 hierarchy,
-  and project quality rating. Supports multiple output formats.
+  project description, and quality rating. Supports multiple output formats.
 license: MIT
+compatibility: Designed for EcoStruxure Automation Expert 24.0+, Python 3.8+
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   author: Claude
   domain: industrial-automation
   platform: EcoStruxure Automation Expert
@@ -50,12 +51,13 @@ Use this skill when:
 
 | Analysis | Description | Script |
 |----------|-------------|--------|
-| Solution | Projects, blocks, library refs | `parse_solution.py` |
+| Solution | Projects, blocks, library refs, EAE version | `parse_solution.py` |
 | Topology | Devices, resources, CAT instances | `parse_system_topology.py` |
-| Protocols | OPC-UA, Modbus, EtherNet/IP | `parse_protocols.py` |
+| Protocols | OPC-UA, Modbus, EtherNet/IP, IO-Link | `parse_protocols.py` |
 | Libraries | SE vs custom, dependencies | `parse_libraries.py` |
 | I/O | Event/data inputs/outputs | `count_io.py` |
-| ISA88 | Asset hierarchy | `parse_isa88.py` |
+| ISA88 | System/subsystem hierarchy | `parse_isa88.py` |
+| Description | Project description (docs or inferred) | `parse_description.py` |
 | Quality | 8-dimension scoring | `calculate_quality.py` |
 
 ## Report Sections
@@ -99,14 +101,16 @@ ASCII diagram showing device topology with:
 
 ### 6. ISA88 Hierarchy
 
-Tree view of asset hierarchy:
+System/Subsystem hierarchy from System.sys:
 ```
-Enterprise
-└── Site
-    └── Area
-        └── ProcessCell
-            └── Unit -> LinkedCAT
+System: System
+  +-- Subsystem: JetMix (JetMix)
+      +-- Equipment modules...
+  +-- Subsystem: JetSpray (JetSpray)
+      +-- Equipment modules...
 ```
+
+Parsed from `Device.FolderPath` attribute and CAT instances in System.sys.
 
 ### 7. Quality Score
 
@@ -162,6 +166,9 @@ python scripts/count_io.py --project-dir PATH [--json] [--details]
 # ISA88 hierarchy
 python scripts/parse_isa88.py --project-dir PATH [--json]
 
+# Project description
+python scripts/parse_description.py --project-dir PATH [--json]
+
 # Quality scoring
 python scripts/calculate_quality.py --project-dir PATH [--json]
 ```
@@ -205,13 +212,18 @@ One-line-per-metric quick overview:
 
 ```
 Project: MyProject
+Description: MyProject is an IEC 61499 automation project for food and beverage processing.
+EAE Version: 24.0.0.0
 Quality: 75/100 (Grade C)
 Projects: 3
-Devices: 4
 Blocks: 250
-Libraries: 15
-Protocols: OPC-UA, Modbus
-ISA88: Configured
+I/O Points: 8,287
+SE Libraries (16): Runtime.Base, SE.AppBase, ...
+Custom Libraries (3): MyLib.IoLink, ...
+Protocols: OPC-UA (0 refs), Modbus (334 refs), EtherNet/IP (1475 refs)
+System: System
+Subsystems (4): JetMix, JetSpray, JetFlam, Ligne
+Equipment Modules: 114
 ```
 
 ## Project Locations
@@ -226,14 +238,16 @@ Default EAE project locations:
 | Pattern | Purpose |
 |---------|---------|
 | `*.sln`, `*.nxtsln` | Solution structure |
-| `*.dfbproj` | Project metadata, library refs |
+| `*.dfbproj` | Project metadata, library refs, EAE version |
 | `*.fbt` | Function blocks (interfaces) |
 | `*.adp` | Adapters |
 | `*.dt` | Data types |
-| `System.cfg`, `System.sys` | Topology, CAT instances |
-| `*.opcua.xml` | OPC-UA configuration |
-| `Assets.json` | ISA88 hierarchy |
+| `System.cfg`, `System.sys` | Topology, CAT instances, ISA88 hierarchy |
+| `*.opcua.xml` | OPC-UA server configuration |
+| `*.hcf` | Hardware configuration (protocol detection) |
+| `*.doc.xml` | Documentation (description extraction) |
 | `Folders.xml` | Code organization |
+| `README.md` | Project documentation |
 
 ## Integration with Other Skills
 
@@ -257,10 +271,11 @@ Default EAE project locations:
 After running analysis:
 
 - [ ] Quality score calculated (not error)
-- [ ] All 7 analysis sections present
+- [ ] All 8 analysis sections present (solution, topology, protocols, libraries, io, isa88, description, quality)
 - [ ] No critical warnings
-- [ ] Device count matches expected
-- [ ] Library list complete
+- [ ] Library list includes SE and custom libraries
+- [ ] Protocol detection shows expected communication types
+- [ ] ISA88 subsystems match expected configuration
 
 ## Troubleshooting
 
@@ -276,13 +291,21 @@ The project may not be an IEC61499 project or may have a non-standard structure.
 
 The project doesn't have a configured system topology yet. This is normal for library-only projects.
 
-### "Assets.json is empty"
+### "No subsystems found"
 
-ISA88 hierarchy is not configured. This will result in 0 points for the ISA88 dimension.
+ISA88 hierarchy is not configured in System.sys. Ensure Device.FolderPath is defined with subsystem names.
 
 ---
 
 ## Changelog
+
+### v1.1.0
+- Added `parse_description.py` - hybrid description generation (docs + metadata inference)
+- Enhanced protocol detection from .hcf files and library references
+- Added EAE version detection from .dfbproj files
+- Fixed ISA88 parsing to use System.sys instead of Assets.json
+- Improved custom library detection via ProjectReference elements
+- Added compatibility field to frontmatter
 
 ### v1.0.0
 - Initial release
